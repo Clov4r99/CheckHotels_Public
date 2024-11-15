@@ -61,38 +61,52 @@ def send_email(subject, body):
         print(f"Failed to send email: {e}")
 
 if __name__ == "__main__":
-    try:
-        # 두 호텔의 예약 가능 여부 확인
-        availability = {hotel_name: check_discount_availability(hotel_name, url)
-                        for hotel_name, url in HOTEL_URLS.items()}
-        
-        # 이메일 제목 및 메시지 작성
-        body = ""
-        if availability["신토신"] and availability["오미야"]:
-            subject = "신토신, 오미야 둘 다 빈 방 있음"
-            body = (
-                "토요코인 사이타마 신토신과 토요코인 오미야 에키 히가시구치 둘 다 빈 방이 있습니다!\n\n"
-                "신토신 예약 확인: {신토신}\n"
-                "오미야 예약 확인: {오미야}"
-            ).format(신토신=HOTEL_URLS["신토신"], 오미야=HOTEL_URLS["오미야"])
-        elif availability["신토신"]:
-            subject = "토요코인 사이타마 신토신 빈 방 있음"
-            body = (
-                "토요코인 사이타마 신토신에 빈 방이 있습니다!\n\n"
-                "신토신 예약 확인: {신토신}"
-            ).format(신토신=HOTEL_URLS["신토신"])
-        elif availability["오미야"]:
-            subject = "토요코인 오미야 에키 히가시구치 빈 방 있음"
-            body = (
-                "토요코인 오미야 에키 히가시구치에 빈 방이 있습니다!\n\n"
-                "오미야 예약 확인: {오미야}"
-            ).format(오미야=HOTEL_URLS["오미야"])
-        else:
-            print("두 호텔 모두 빈 방이 없습니다.")
-            exit()  # 빈 방이 없으면 이메일 전송하지 않음
-        
-        # 이메일 보내기
-        send_email(subject, body)
+    start_time = datetime.now()  # 시작 시간 기록
+    max_duration = timedelta(hours=6)  # 최대 실행 시간: 6시간
 
-    except Exception as e:
-        print(f"Error: {e}")
+    while True:  # 무한 루프 시작
+        try:
+            # 실행 시간 확인
+            elapsed_time = datetime.now() - start_time
+            if elapsed_time > max_duration:
+                print("6시간이 경과하여 스크립트를 종료합니다.")
+                break  # 루프 종료
+
+            # 두 호텔의 예약 가능 여부 확인
+            availability = {hotel_name: check_discount_availability(hotel_name, url)
+                            for hotel_name, url in HOTEL_URLS.items()}
+            
+            # 이메일 제목 및 메시지 작성
+            body = ""
+            if availability["신토신"] and availability["오미야"]:
+                subject = "신토신, 오미야 둘 다 빈 방 있음"
+                body = (
+                    "토요코인 사이타마 신토신과 토요코인 오미야 에키 히가시구치 둘 다 빈 방이 있습니다!\n\n"
+                    "신토신 예약 확인: {신토신}\n"
+                    "오미야 예약 확인: {오미야}"
+                ).format(신토신=HOTEL_URLS["신토신"], 오미야=HOTEL_URLS["오미야"])
+            elif availability["신토신"]:
+                subject = "토요코인 사이타마 신토신 빈 방 있음"
+                body = (
+                    "토요코인 사이타마 신토신에 빈 방이 있습니다!\n\n"
+                    "신토신 예약 확인: {신토신}"
+                ).format(신토신=HOTEL_URLS["신토신"])
+            elif availability["오미야"]:
+                subject = "토요코인 오미야 에키 히가시구치 빈 방 있음"
+                body = (
+                    "토요코인 오미야 에키 히가시구치에 빈 방이 있습니다!\n\n"
+                    "오미야 예약 확인: {오미야}"
+                ).format(오미야=HOTEL_URLS["오미야"])
+            else:
+                print("두 호텔 모두 빈 방이 없습니다.")
+                time.sleep(60)  # 1분 대기 후 다시 확인
+                continue  # 다음 반복으로 이동
+            
+            # 이메일 보내기
+            send_email(subject, body)
+        except Exception as e:
+            print(f"Error: {e}")
+        
+        # 1분 대기 후 다시 실행
+        print("Waiting for 1 minute before checking again...")
+        time.sleep(60)

@@ -5,8 +5,8 @@ on:
   push:  # 코드 푸시 시 자동 실행
     branches:
       - main  # main 브랜치에 푸시될 때 실행
-  schedule:  # 1분마다 실행
-    - cron: "*/1 * * * *"  # 매 1분마다 실행
+  schedule:
+    - cron: "0 */6 * * *"  # 매 6시간마다 실행
   workflow_dispatch:  # 수동 실행 옵션
     inputs:
       trigger:  # 워크플로를 수동으로 실행할 때 입력값 (선택 사항)
