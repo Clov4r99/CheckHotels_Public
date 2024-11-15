@@ -1,0 +1,25 @@
+name: Hotel Availability Checker
+
+on:
+  schedule:
+    - cron: "*/1 * * * *"  # 매 1분마다 실행
+  workflow_dispatch:  # 수동 실행도 가능
+
+jobs:
+  check_hotels:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3  # GitHub Actions로 코드 가져오기
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.9  # 사용하려는 Python 버전
+
+    - name: Install dependencies
+      run: pip install -r requirements.txt || true  # 필요시 requirements.txt 활용
+
+    - name: Run hotel checker
+      run: python CheckHotels.py
