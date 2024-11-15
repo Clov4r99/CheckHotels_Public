@@ -7,12 +7,12 @@ from email.mime.multipart import MIMEMultipart
 # 호텔 검색 URL
 HOTEL_URLS = {
     "신토신": "https://www.toyoko-inn.com/korea/search/result?"
-              "lcl_id=ko&chck_in=2025/03/29&inn_date=1&rsrv_num=1&sel_ldgngPpl=1"
+              "lcl_id=ko&chck_in=2025/04/29&inn_date=1&rsrv_num=1&sel_ldgngPpl=1"
               "&sel_area=18&sel_area_txt=%EC%82%AC%EC%9D%B4%ED%83%80%EB%A7%88"
               "&sel_htl=00121&rd_smk=0&sel_room_clss_Id=10&sel_prkng=&sel_cnfrnc="
               "&sel_hrtfll_room=&srch_key_word=&lttd=&lngtd=&pgn=1&sel_dtl_cndtn=&prcssng_dvsn=dtl&",
     "오미야": "https://www.toyoko-inn.com/korea/search/result?"
-              "lcl_id=ko&chck_in=2025/03/29&inn_date=1&rsrv_num=1&sel_ldgngPpl=1"
+              "lcl_id=ko&chck_in=2025/04/29&inn_date=1&rsrv_num=1&sel_ldgngPpl=1"
               "&sel_area=18&sel_area_txt=%EC%82%AC%EC%9D%B4%ED%83%80%EB%A7%88"
               "&sel_htl=00334&rd_smk=0&sel_room_clss_Id=10&sel_prkng=&sel_cnfrnc="
               "&sel_hrtfll_room=&srch_key_word=&lttd=&lngtd=&pgn=1&sel_dtl_cndtn=&prcssng_dvsn=dtl&"
