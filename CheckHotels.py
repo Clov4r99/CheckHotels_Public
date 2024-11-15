@@ -3,6 +3,7 @@ import requests
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from datetime import datetime, timedelta
 
 # 호텔 검색 URL
 HOTEL_URLS = {
