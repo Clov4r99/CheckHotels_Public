@@ -3,7 +3,7 @@ name: Hotel Availability Checker
 on:
   schedule:
     - cron: "*/1 * * * *"  # 매 1분마다 실행
-  workflow_dispatch:  # 수동 실행도 가능
+  workflow_dispatch:  # 수동 실행 가능
 
 jobs:
   check_hotels:
@@ -11,15 +11,17 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v3  # GitHub Actions로 코드 가져오기
+      uses: actions/checkout@v3
+      with:
+        node-version: '20'  # Node.js 버전 명시적으로 설정
 
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: 3.9  # 사용하려는 Python 버전
+        python-version: 3.9  # Python 버전
 
     - name: Install dependencies
-      run: pip install -r requirements.txt || true  # 필요시 requirements.txt 활용
+      run: pip install -r requirements.txt || true
 
-    - name: Run hotel checker
+    - name: Run hotel checker script
       run: python CheckHotels.py
