@@ -1,4 +1,3 @@
-import os
 import requests
 import smtplib
 from email.mime.text import MIMEText
@@ -19,11 +18,11 @@ HOTEL_URLS = {
 }
 
 # Gmail 계정 정보
-EMAIL_ADDRESS = os.getenv("EMAIL_ADDRESS")  # 발신자 Gmail 주소
-EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD")   # Gmail 앱 비밀번호
+EMAIL_ADDRESS = "shpark199@gmail.com"  # 발신자 Gmail 주소
+EMAIL_PASSWORD = "nmvc wsma qqqv wnco"   # Gmail 앱 비밀번호
 SMTP_SERVER = "smtp.gmail.com"
 SMTP_PORT = 587
-USER_EMAIL = os.getenv("USER_EMAIL")  # 수신자 이메일 주소
+USER_EMAIL = "skpark196@naver.com"  # 수신자 이메일 주소
 
 def check_discount_availability(hotel_name, url):
     """
